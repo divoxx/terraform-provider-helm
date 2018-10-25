@@ -1,6 +1,8 @@
 TEST?=$$(go list ./... |grep -v 'vendor')
 GOFMT_FILES?=$$(find . -name '*.go' |grep -v vendor)
 COVER_TEST?=$$(go list ./... |grep -v 'vendor')
+WEBSITE_REPO=github.com/hashicorp/terraform-website
+PKG_NAME=helm
 
 PKG_OS ?= darwin linux
 PKG_ARCH ?= amd64
@@ -29,6 +31,9 @@ testacc: fmtcheck
 
 testrace: fmtcheck
 	TF_ACC= go test -race $(TEST) $(TESTARGS)
+
+compile: fmtcheck
+	@sh -c "'$(CURDIR)/scripts/compile.sh'"
 
 cover:
 	@go tool cover 2>/dev/null; if [ $$? -eq 3 ]; then \
@@ -81,4 +86,18 @@ packages:
 clean:
 	@rm -rf $(BUILD_PATH)
 
-.PHONY: build test testacc testrace cover vet fmt fmtcheck errcheck vendor-status test-compile
+website:
+ifeq (,$(wildcard $(GOPATH)/src/$(WEBSITE_REPO)))
+	echo "$(WEBSITE_REPO) not found in your GOPATH (necessary for layouts and assets), get-ting..."
+	git clone https://$(WEBSITE_REPO) $(GOPATH)/src/$(WEBSITE_REPO)
+endif
+	@$(MAKE) -C $(GOPATH)/src/$(WEBSITE_REPO) website-provider PROVIDER_PATH=$(shell pwd) PROVIDER_NAME=$(PKG_NAME)
+
+website-test:
+ifeq (,$(wildcard $(GOPATH)/src/$(WEBSITE_REPO)))
+	echo "$(WEBSITE_REPO) not found in your GOPATH (necessary for layouts and assets), get-ting..."
+	git clone https://$(WEBSITE_REPO) $(GOPATH)/src/$(WEBSITE_REPO)
+endif
+	@$(MAKE) -C $(GOPATH)/src/$(WEBSITE_REPO) website-provider-test PROVIDER_PATH=$(shell pwd) PROVIDER_NAME=$(PKG_NAME)
+
+.PHONY: build test testacc testrace cover vet fmt fmtcheck errcheck vendor-status test-compile packages clean website website-test

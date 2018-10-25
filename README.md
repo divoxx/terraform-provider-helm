@@ -10,7 +10,6 @@ The following changes exists in this repository:
 * `helm_release` resources are automatically inserted into `repositories.yml` on the box running the terraform command.
 
 Terraform Provider for Helm
-===========================
 
 This is a [Helm](https://github.com/kubernetes/helm) provider for [Terraform](https://www.terraform.io/).
 
@@ -21,9 +20,9 @@ Contents
 
 * [Installation](#installation)
 * [Example](#example)
-* [Documentation](docs/README.md)
-  * [Resource: helm_release](docs/release.md)
-  * [Resource: helm_repository](docs/repository.md)
+* [Documentation](https://www.terraform.io/docs/providers/helm/index.html)
+  * [Resource: helm_release](https://www.terraform.io/docs/providers/helm/release.html)
+  * [Resource: helm_repository](https://www.terraform.io/docs/providers/helm/repository.html)
 
 
 Installation
@@ -45,7 +44,7 @@ distributions from the [Releases](https://github.com/divoxx/terraform-provider-h
 Download and uncompress the latest release for your OS. This example uses the linux binary.
 
 ```sh
-> wget https://github.com/divoxx/terraform-provider-helm/releases/download/v0.6.0/terraform-provider-helm_v0.6.0_linux_amd64.tar.gz
+> wget https://github.com/divoxx/terraform-provider-helm/releases/download/v0.6.1.rk/terraform-provider-helm_v0.6.0_linux_amd64.tar.gz
 > tar -xvf terraform-provider-helm*.tar.gz
 ```
 
@@ -86,7 +85,7 @@ Example
 
 This is a small example of how to install the mariadb chart on your default
 kubernetes cluster, since the provider was initialized, all the configuration
-is retrieve from the environment. Please read the [documentation](docs/README.md) for more
+is retrieved from the environment. Please read the [documentation](https://www.terraform.io/docs/providers/helm/index.html) for more
 information.
 
 You should have a local configured copy of kubectl.
