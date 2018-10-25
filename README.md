@@ -1,3 +1,12 @@
+Disclaimer
+==========
+
+**IMPORTANT: This is a fork of the [official repository](https://github.com/terraform-providers/terraform-provider-helm) which contains some specific changes that haven't been accepted to the main repository. Use at your own discretion.**.
+
+The following changes exists in this repository:
+
+* `helm_release` resources are automatically inserted into `repositories.yml` on the box running the terraform command.
+
 Terraform Provider for Helm [![Build Status](https://travis-ci.org/mcuadros/terraform-provider-helm.svg?branch=v0.4.0)](https://travis-ci.org/mcuadros/terraform-provider-helm) [![GitHub release](https://img.shields.io/github/release/mcuadros/terraform-provider-helm.svg)](https://github.com/mcuadros/terraform-provider-helm/releases) [![license](https://img.shields.io/github/license/mcuadros/terraform-provider-helm.svg)]()
 ===========================
 
